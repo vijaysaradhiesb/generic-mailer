@@ -1,0 +1,15 @@
+# Created by buildmetadata-maven-plugin 1.7.0 ( SHA: 6f444cae ) 
+build.artifactId=mailer-service-model
+build.groupId=com.integration.service
+build.java.compiler=HotSpot 64-Bit Tiered Compilers
+build.java.runtime.name=Java(TM) SE Runtime Environment
+build.java.runtime.version=1.8.0_131-b11
+build.java.vendor=Oracle Corporation
+build.java.vm=Java HotSpot(TM) 64-Bit Server VM
+build.maven.execution.cmdline=clean install
+build.maven.version=3.2.5
+build.scmRevision.date=18.04.2017
+build.scmRevision.id=fe9e368214585cd82ea219c7e46c4033cc06c76a
+build.scmRevision.url=scm\:git\:ssh\://ald-stash\:7999/integ/generic-mailer.git/mailer-service-model
+build.version=1.0.1-SNAPSHOT
+build.version.full=1.0.1rfe9e368214585cd82ea219c7e46c4033cc06c76a-SNAPSHOT

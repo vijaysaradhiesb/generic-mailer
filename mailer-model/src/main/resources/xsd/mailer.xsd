@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mailer="http://integ.com/mailer"
+            targetNamespace="http://integ.com/mailer" attributeFormDefault="unqualified"
+            elementFormDefault="qualified">
+
+    <!--http://forum.unifiedemail.net/default.aspx?g=posts&t=68-->
+    <!--The following are derived fom SMTP Headers. Mya not all be needed -->
+
+    <xsd:element name="MailMessage">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="from" type="xsd:string"/>
+                <xsd:element name="subject" type="xsd:string"/>
+                <xsd:element name="date" type="xsd:dateTime" minOccurs="0"/>
+                <xsd:element name="contentType" type="xsd:string"/>
+                <xsd:element name="inReplyTo" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="precedence" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="references" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="replyTo" type="xsd:string"/>
+                <xsd:element name="sender" type="xsd:string"/>
+                <xsd:element name="body" type="xsd:string"/>
+                <xsd:element name="errorTo" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="to" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                <xsd:element name="bcc" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="cc" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="attachments" type="mailer:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="Attachment">
+        <xsd:sequence>
+            <xsd:element name="content" type="xsd:base64Binary" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="attachmentName" type="xsd:string"/>
+        <xsd:attribute name="mimeType" type="xsd:string"/>
+    </xsd:complexType>
+
+</xsd:schema>

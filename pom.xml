@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Define compatibility layer pointing to JBFuse release we commonly use -->
+    <parent>
+        <groupId>com.integration.service</groupId>
+        <artifactId>integration-parent</artifactId>
+        <version>[1.0,1.1)</version>
+    </parent>
+
+    <groupId>com.integration.service</groupId>
+    <artifactId>mailer-service-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.1-SNAPSHOT</version>
+
+    <name>${organization.name} ${module.name} Parent</name>
+
+    <properties>
+        <module.name>Generic Mailer</module.name>
+        <feature.name>integ-genericMailer</feature.name>
+        <organization.name>Integ</organization.name>
+    </properties>
+
+    <scm>
+        <connection>${scm.protocol}${scm.git.protocol}${scm.host}:${scm.ssh.port}/integ/generic-mailer.git</connection>
+        <developerConnection>${scm.protocol}${scm.git.protocol}${scm.host}:${scm.ssh.port}/integ/generic-mailer.git</developerConnection>
+        <url>http://${scm.host}:${scm.http.port}/projects/integ/repos/generic-mailer/</url>
+  </scm>
+
+    <modules>
+        <module>mailer-model</module>
+        <module>mailer-service</module>
+    </modules>
+
+</project>
+
+
+

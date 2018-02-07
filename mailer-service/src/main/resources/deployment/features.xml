@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<features name="${feature.name}-${project.version}">
+    <!--
+        Usage:
+        features:addurl mvn:${project.groupId}/${project.artifactId}/${pom.version}/xml/features
+     -->
+
+    <repository>mvn:com.integration.product.connectivity/jms-connectivity-provider/${connectivity-jms.version}/xml/features</repository>
+
+    <feature name="${feature.name}" version="${project.version}">
+        <feature version="${connectivity-jms.version}">integ-connectivityJms</feature>
+        <feature>camel-spring</feature>
+        <feature>camel-jaxb</feature>
+        <feature>camel-mail</feature>
+        <bundle start-level="50">mvn:com.google.guava/guava/${guava-version}</bundle>
+        <bundle start-level="50" dependency='true'>mvn:${project.groupId}/${project.artifactId}-model/${project.version}</bundle>
+        <bundle start-level="50">mvn:${project.groupId}/${project.artifactId}/${pom.version}</bundle>
+    </feature>
+
+    <feature name="${feature.name}-docker-connectivity" version="${project.version}">
+        <feature version="${connectivity-jms.version}">integ-connectivityJms-jms1</feature>
+    </feature>
+
+</features>

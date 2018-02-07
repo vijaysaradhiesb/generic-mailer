@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd
+                        http://camel.apache.org/schema/spring
+                        http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <!-- enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="jtaTransactionManager"/>
+
+    <bean id="whiteList" class="com.integ.integration.mailer.WhitelistChecker">
+        <constructor-arg value="${whitelist.email.address}"/>
+        <constructor-arg value="${whitelist.domain.address}"/>
+        <constructor-arg value="${override.email.address}"/>
+    </bean>
+
+    <bean id="mailProcessor" class="com.integ.integration.mailer.XMLMessageMailerProcessor">
+        <property name="whiteList" ref="whiteList"/>
+        <property name="subjectPrefix" value="${email.subject.prefix}"/>
+    </bean>
+
+    <!-- No Error Handling as we are using camel transactions and ActiveMQ broker configuration for re-tries and DLQs -->
+    <camelContext id="com.integ.integration.mailer" useMDCLogging="true" trace="${camelTraceEnabled:false}" depends-on="jmstx"
+                  xmlns="http://camel.apache.org/schema/spring">
+
+        <propertyPlaceholder id="camelProps" location="ref:props"/>
+
+        <route id="xmlMessageMailer">
+            <from uri="{{mq.xmlMessage.queue}}"/>
+            <transacted ref="PROPAGATION_MANDATORY"/>
+            <to uri="log:com.integ.integration.mailer.XMLMessageMailer.in?level=DEBUG&amp;showAll=true&amp;maxChars=5000"/>
+            <log message="After camel consumer.."/>
+            <convertBodyTo type="com.integ.mailer.MailMessage"/>
+            <log message="After jaxb unmarshaller.."/>
+            <process ref="mailProcessor"/>
+            <to uri="log:com.integ.integration.mailer.XMLMessageMailer.out?level=DEBUG&amp;showAll=true&amp;maxChars=5000"/>
+            <log message="Before SMTP producer.."/>
+
+            <!--
+                If the to header is empty, e.g. because the white list filtering removed invalid addresses, do not send to Mail Producer at all
+             -->
+            <filter>
+                <simple>${in.header.to} != null and ${in.header.to} != ''</simple>
+                <to uri="smtp://{{smtp.server}}?username={{smtp.user}}&amp;password={{smtp.pass}}&amp;debugMode={{smtp.debug}}" id="smtpXmlMessageDestination"/>
+                <log message="xmlMessageMailer successfully sent email to: ${header.to}"/>
+            </filter>
+        </route>
+
+    </camelContext>
+
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Osmorc" name="OSGi">
+      <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="mailer-service-model-1.0.1-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="com.integration.service.mailer-service-model" bundleVersion="1.0.1.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
+        <additionalProperties>
+          <property key="Bundle-Description" value="JBoss Fuse is an open source ESB with capabilities based on Apache Camel, Apache CXF, Apache ActiveMQ, Apache Karaf and Fabric8 in a single integrated distribution" />
+          <property key="Bundle-Vendor" value="Red Hat" />
+          <property key="Bundle-DocURL" value="http://redhat.com" />
+          <property key="Import-Package" value="*" />
+          <property key="Export-Package" value="com.integ.mailer.*" />
+          <property key="Scm-Revision" value="${buildNumber}" />
+          <property key="Build-Timestamp" value="${build.datetime}" />
+          <property key="Bundle-Name" value="Integ Generic Mailer Model" />
+          <property key="Include-Resource" value="xsd/global.xjb=$MODULE_DIR$/src/main/resources/xsd/global.xjb,xsd/mailer.xsd=$MODULE_DIR$/src/main/resources/xsd/mailer.xsd" />
+        </additionalProperties>
+        <additionalJARContents />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/xjc" isTestSource="false" generated="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.6.4" level="project" />
+  </component>
+</module>
